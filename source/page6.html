@@ -1,0 +1,85 @@
+<html>
+   <head>
+      <title> TestPage </title>
+      <style>
+         body {
+         display: flex;
+         flex-direction: column;
+         }
+         .header {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         }
+         .cheating-apps, .studying-apps {
+         width:35px; 
+         height: 35px;
+         }
+         .studying-apps  {
+         align-self: flex-end;
+         }
+         .category {
+         flex-grow: 1;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 90vh;
+         }
+         #category-image {
+         width: 300px;
+         height: 300px;
+         }
+         #error {
+         margin-top: 50px;
+         font-size: 55px;
+         color: red;
+         }
+      </style>
+      <script>
+         document.addEventListener('keypress', logKey);
+         const imgUrls = ["./cimages/cheat1.png", "./cimages/cheat2.png", "./cimages/cheat3.png", "./cimages/cheat4.png", "./cimages/cheat5.png", "./cimages/cheat6.png", "./simages/study1.png", "./simages/study2.png", "./simages/study3.png", "./simages/study4.png", "./simages/study5.png", "./simages/study6.png"];
+         let currentImgChar;
+         let iterationsCount = 0;
+         function renderPage() {
+         triggerRandom();
+         }
+         function triggerRandom() {
+         iterationsCount++;
+         const ind = Math.floor(Math.random() * 12);
+         document.getElementById("category-image").src = imgUrls[ind];
+         if(ind <= 5) {
+         currentImgChar = 'KeyE'
+         } else {
+         currentImgChar = 'KeyI';
+         }
+         }
+         
+         function logKey(e) {
+         if(e.code == 'KeyE' || e.code == 'KeyI') {
+         if(e.code != currentImgChar) {
+         document.getElementById("error").innerText = 'X';
+         } else {
+         document.getElementById("error").innerText = '';
+         if(iterationsCount == 20) {
+         window.location.href = 'page7.html';
+         } else {
+         triggerRandom();
+         }
+         }
+         }
+         
+         }
+      </script>
+   </head>
+   <body onload="renderPage()">
+      <div class="header">
+         <img class="cheating-apps" src="./cimages/cheat1.png">
+         <img class="studying-apps" src="./simages/study1.png">
+      </div>
+      <div class="category">
+         <img id="category-image">
+         <div id="error"></div>
+      </div>
+   </body>
+</html>
